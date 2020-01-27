@@ -1,0 +1,383 @@
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage{fancyhdr}           % For header and footer
+\usepackage{multicol}           % Allows multicols in tables
+\usepackage{tabularx}           % Intelligent column widths
+\usepackage{tabulary}           % Used in header and footer
+\usepackage{hhline}             % Border under tables
+\usepackage{graphicx}           % For images
+\usepackage{xcolor}             % For hex colours
+%\usepackage[utf8x]{inputenc}    % For unicode character support
+\usepackage[T1]{fontenc}        % Without this we get weird character replacements
+\usepackage{colortbl}           % For coloured tables
+\usepackage{setspace}           % For line height
+\usepackage{lastpage}           % Needed for total page number
+\usepackage{seqsplit}           % Splits long words.
+%\usepackage{opensans}          % Can't make this work so far. Shame. Would be lovely.
+\usepackage[normalem]{ulem}     % For underlining links
+% Most of the following are not required for the majority
+% of cheat sheets but are needed for some symbol support.
+\usepackage{amsmath}            % Symbols
+\usepackage{MnSymbol}           % Symbols
+\usepackage{wasysym}            % Symbols
+%\usepackage[english,german,french,spanish,italian]{babel}              % Languages
+
+% Document Info
+\author{sanjeev95}
+\pdfinfo{
+  /Title (python-pandas.pdf)
+  /Creator (Cheatography)
+  /Author (sanjeev95)
+  /Subject (PYTHON PANDAS Cheat Sheet)
+}
+
+% Lengths and widths
+\addtolength{\textwidth}{6cm}
+\addtolength{\textheight}{-1cm}
+\addtolength{\hoffset}{-3cm}
+\addtolength{\voffset}{-2cm}
+\setlength{\tabcolsep}{0.2cm} % Space between columns
+\setlength{\headsep}{-12pt} % Reduce space between header and content
+\setlength{\headheight}{85pt} % If less, LaTeX automatically increases it
+\renewcommand{\footrulewidth}{0pt} % Remove footer line
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\renewcommand{\seqinsert}{\ifmmode\allowbreak\else\-\fi} % Hyphens in seqsplit
+% This two commands together give roughly
+% the right line height in the tables
+\renewcommand{\arraystretch}{1.3}
+\onehalfspacing
+
+% Commands
+\newcommand{\SetRowColor}[1]{\noalign{\gdef\RowColorName{#1}}\rowcolor{\RowColorName}} % Shortcut for row colour
+\newcommand{\mymulticolumn}[3]{\multicolumn{#1}{>{\columncolor{\RowColorName}}#2}{#3}} % For coloured multi-cols
+\newcolumntype{x}[1]{>{\raggedright}p{#1}} % New column types for ragged-right paragraph columns
+\newcommand{\tn}{\tabularnewline} % Required as custom column type in use
+
+% Font and Colours
+\definecolor{HeadBackground}{HTML}{333333}
+\definecolor{FootBackground}{HTML}{666666}
+\definecolor{TextColor}{HTML}{333333}
+\definecolor{DarkBackground}{HTML}{363CFF}
+\definecolor{LightBackground}{HTML}{DCDDFF}
+\renewcommand{\familydefault}{\sfdefault}
+\color{TextColor}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhead{} % Set header to blank
+\fancyfoot{} % Set footer to blank
+\fancyhead[L]{
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{C}
+    \SetRowColor{DarkBackground}
+    \vspace{-7pt}
+    {\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\noindent
+        \hspace*{-6pt}\includegraphics[width=5.8cm]{/web/www.cheatography.com/public/images/cheatography_logo.pdf}}
+    }
+\end{tabulary}
+\columnbreak
+\begin{tabulary}{11cm}{L}
+    \vspace{-2pt}\large{\bf{\textcolor{DarkBackground}{\textrm{PYTHON PANDAS Cheat Sheet}}}} \\
+    \normalsize{by \textcolor{DarkBackground}{sanjeev95} via \textcolor{DarkBackground}{\uline{cheatography.com/111141/cs/21621/}}}
+\end{tabulary}
+\end{multicols}}
+
+\fancyfoot[L]{ \footnotesize
+\noindent
+\begin{multicols}{3}
+\begin{tabulary}{5.8cm}{LL}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{2}{p{5.377cm}}{\bf\textcolor{white}{Cheatographer}}  \\
+  \vspace{-2pt}sanjeev95 \\
+  \uline{cheatography.com/sanjeev95} \\
+  \end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Cheat Sheet}}  \\
+   \vspace{-2pt}Published 20th January, 2020.\\
+   Updated 22nd January, 2020.\\
+   Page {\thepage} of \pageref{LastPage}.
+\end{tabulary}
+\vfill
+\columnbreak
+\begin{tabulary}{5.8cm}{L}
+  \SetRowColor{FootBackground}
+  \mymulticolumn{1}{p{5.377cm}}{\bf\textcolor{white}{Sponsor}}  \\
+  \SetRowColor{white}
+  \vspace{-5pt}
+  %\includegraphics[width=48px,height=48px]{dave.jpeg}
+  Measure your website readability!\\
+  www.readability-score.com
+\end{tabulary}
+\end{multicols}}
+
+
+
+
+\begin{document}
+\raggedright
+\raggedcolumns
+
+% Set font size to small. Switch to any value
+% from this page to resize cheat sheet text:
+% www.emerson.emory.edu/services/latex/latex_169.html
+\footnotesize % Small font.
+
+\begin{multicols*}{3}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{install and import}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{installing pandas \{\{nl\}\} `pip install pandas`} \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{pip install pandas \{\{nl\}\} `import pandas as pd`} \tn 
+% Row Count 2 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Reading and describing}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{pd -\textgreater{} pandas \{\{nl\}\} df-\textgreater{} dataframe} \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{to read a file into a dataframe \{\{nl\}\} `df= \seqsplit{pd.read\_csv('filename')`}} \tn 
+% Row Count 3 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{look at the first 5 lines \{\{nl\}\} `df.head()`} \tn 
+% Row Count 4 (+ 1)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{to describe df  \{\{nl\}\} `df.describe()`} \tn 
+% Row Count 5 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{`df.info()`} \tn 
+% Row Count 6 (+ 1)
+% Row 5
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{to print all the column names \{\{nl\}\}`telecom\_data.columns`} \tn 
+% Row Count 8 (+ 2)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{to get the dimension of df \{\{nl\}\} `df.shape`} \tn 
+% Row Count 9 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.4885 cm} x{2.4885 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Sorting and filtering}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{{\bf{sort}} \{\{nl\}\} sorting can be done column wise - default is ascending \{\{nl\}\} \seqsplit{`df.sort\_values(by='Total} day charge')`} \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+\seqsplit{`df.sort\_values(col1)`} & Sort values by col1 in ascending order (use ascending =False for descending sort) \tn 
+% Row Count 8 (+ 5)
+% Row 2
+\SetRowColor{LightBackground}
+`df.sort\_values({[}col1,col2{]},ascending={[}True,False{]})` & Sort values by col1 in ascending order then col2 in descending order \tn 
+% Row Count 12 (+ 4)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{Filtering  \{\{nl\}\} `df{[}condition{]} ~~~  \#eg: df{[}df{[}'col'{]}\textgreater{}5{]}`} \tn 
+% Row Count 14 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+`df{[}df{[}'col'{]} \textgreater{} 0.5{]}` & Rows where the column col is greater than 0.5 \tn 
+% Row Count 17 (+ 3)
+% Row 5
+\SetRowColor{white}
+`df{[}(df{[}col{]} \textgreater{} 0.5) \& (df{[}col{]} \textless{} 0.7){]}` & Rows where 0.7 \textgreater{} col \textgreater{} 0.5 \tn 
+% Row Count 19 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Inplace}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{\bf{NOTE}}} \tn 
+% Row Count 1 (+ 1)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{`df.merge(df2)` gives you a copy of df merged with df2. you may save it to a new variable. ex `df3=df.merge(df2)`} \tn 
+% Row Count 4 (+ 3)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{if you want to merge df2 to df right away use inplace. `df.merge(df2,inplace=True)`} \tn 
+% Row Count 6 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{p{0.4977 cm} p{0.4977 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Rows and columns}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{to delete a row - {[}axis=0 means rows{]}\{\{nl\}\} `new\_df = df.drop({[}2,3{]},axis = 0)   \#this drops the row with index 2,3`} \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{to delete a column- {[}axis=1 means columns{]}\{\{nl\}\} `new\_df = df.drop({[}'col1','col2'{]},axis = 0)   \#this drops the column with name col1 and col2`} \tn 
+% Row Count 6 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{X}
+\SetRowColor{DarkBackground}
+\mymulticolumn{1}{x{5.377cm}}{\bf\textcolor{white}{Df manipulation}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{{\bf{create or edit a new column}} \{\{nl\}\} `df{[}'new\_colname'{]} = 5 ~ \#this creates a new new column with all values as 5`} \tn 
+% Row Count 3 (+ 3)
+% Row 1
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{create a new column \{\{nl\}\} `df{[}'new\_colname'{]} = {[}list of values{]} ~ \#this creates a new column with list of values assigned to each corresponding row `} \tn 
+% Row Count 7 (+ 4)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{NOTE : `df{[}'new\_colname'{]} = {[}list of values{]}` throws an error if the no of items in {[}list of values{]} doesn't match no of rows} \tn 
+% Row Count 10 (+ 3)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{{\bf{create or edit a new row}}} \tn 
+% Row Count 11 (+ 1)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{1}{x{5.377cm}}{`df.loc{[}index\_of\_row{]} = {[}list of items{]}`} \tn 
+% Row Count 12 (+ 1)
+% Row 5
+\SetRowColor{white}
+\mymulticolumn{1}{x{5.377cm}}{NOTE : `df.loc{[}index\_of\_row{]} = {[}list of items{]}` throws an error if the no of items doesn't match no of rows} \tn 
+% Row Count 15 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}-}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{1.54287 cm} x{3.43413 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Selection}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+`df{[}col{]}` & Returns column with label col as Series \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+`df{[}{[}col1, col2{]}{]}` & Returns multiple columns as a new DataFrame \tn 
+% Row Count 4 (+ 2)
+% Row 2
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{\seqsplit{~~	Country	~~Capital	~~~~~~Population} \{\{nl\}\}1	Belgium~~	Brussels	~~~~11190846 \{\{nl\}\}2	India	~~~~~~~New Delhi	~1303171035 \{\{nl\}\}3	Brazil	~~~~~~Brasilia	~~~~~~207847528} \tn 
+% Row Count 11 (+ 7)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{`df.iloc({[}0{]}, {[}0{]})` -{}-\textgreater{}  'Belgium' ~| s.iloc{[}0{]} | Selection by position (0th position on row and column)} \tn 
+% Row Count 14 (+ 3)
+% Row 4
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{`df.loc({[}0{]},  {[}'Country'{]})` -{}-\textgreater{} 'Belgium'} \tn 
+% Row Count 15 (+ 1)
+% Row 5
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{`df.ix{[}2{]}` -{}-\textgreater{}\{\{nl\}\} Country   ~~~~~~ Brazil \{\{nl\}\}Capital~~~~~~~~    Brasilia \{\{nl\}\}Population ~ 207847528} \tn 
+% Row Count 19 (+ 4)
+% Row 6
+\SetRowColor{LightBackground}
+\mymulticolumn{2}{x{5.377cm}}{`df.ix{[}1, 'Capital'{]}` -{}-\textgreater{} 'New Delhi'} \tn 
+% Row Count 20 (+ 1)
+% Row 7
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{df.iloc{[}0,:{]} | select First row} \tn 
+% Row Count 21 (+ 1)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.4885 cm} x{2.4885 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{Data Cleaning}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+\seqsplit{df.set\_index('column\_one')} & Change the index with a new column \tn 
+% Row Count 2 (+ 2)
+% Row 1
+\SetRowColor{white}
+df.columns = {[}'new\_col\_name1','new\_col\_name2','new\_col\_name3'{]} & Rename columns \tn 
+% Row Count 6 (+ 4)
+% Row 2
+\SetRowColor{LightBackground}
+pd.isnull() & Checks for null Values, Returns Boolean Arrray \tn 
+% Row Count 9 (+ 3)
+% Row 3
+\SetRowColor{white}
+pd.notnull() & Opposite of pd.isnull() \tn 
+% Row Count 11 (+ 2)
+% Row 4
+\SetRowColor{LightBackground}
+df.dropna() & Drop all rows that contain null values \tn 
+% Row Count 13 (+ 2)
+% Row 5
+\SetRowColor{white}
+df.dropna(axis=1) & Drop all columns that contain null values \tn 
+% Row Count 16 (+ 3)
+% Row 6
+\SetRowColor{LightBackground}
+df.dropna(axis=1,thresh=n) & Drop all rows have have less than n non null \tn 
+% Row Count 19 (+ 3)
+% Row 7
+\SetRowColor{white}
+df.fillna(x) & Replace all null values with x \tn 
+% Row Count 21 (+ 2)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+\begin{tabularx}{5.377cm}{x{2.33919 cm} x{2.63781 cm} }
+\SetRowColor{DarkBackground}
+\mymulticolumn{2}{x{5.377cm}}{\bf\textcolor{white}{JOIN/COMBINE}}  \tn
+% Row 0
+\SetRowColor{LightBackground}
+`df1.append(df2)` & Adds the rows in df1 to the end of \{\{nl\}\}df2 (columns should \{\{nl\}\}be identical) \tn 
+% Row Count 4 (+ 4)
+% Row 1
+\SetRowColor{white}
+`pd.concat({[}df1, df2{]},axis=1)` & Adds the columns in \{\{nl\}\}df1 to the end \{\{nl\}\}of df2 (rows should be \{\{nl\}\}identical) \tn 
+% Row Count 9 (+ 5)
+% Row 2
+\SetRowColor{LightBackground}
+`df1.join(df2,on=col1,how='inner')` & joins the columns in df1 with the columns on \{\{nl\}\}df2 where the rows \{\{nl\}\}for col have identical \{\{nl\}\}values. how can be \{\{nl\}\}one of 'left', \{\{nl\}\}'right', 'outer', 'inner' \tn 
+% Row Count 18 (+ 9)
+% Row 3
+\SetRowColor{white}
+\mymulticolumn{2}{x{5.377cm}}{left = takes the index of left df\{\{nl\}\}right =takes the index of left  \{\{nl\}\} outer = union of both keys\{\{nl\}\}inner = intersection of both keys} \tn 
+% Row Count 21 (+ 3)
+\hhline{>{\arrayrulecolor{DarkBackground}}--}
+\end{tabularx}
+\par\addvspace{1.3em}
+
+
+% That's all folks
+\end{multicols*}
+
+\end{document}
